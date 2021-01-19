@@ -1,4 +1,4 @@
-const simpleMessage = require('./actions/simpleMessage');
+const simpleMessage = require('./action-blueprints/simpleMessage');
 
 async function sendSimpleMessage(action, message) {
   try {
@@ -15,7 +15,6 @@ async function sendSimpleMessage(action, message) {
 }
 
 async function run(action, message) {
-  console.log(action.Blueprint[0])
   try {
     if (action.Blueprint[0] === undefined){
       return {
