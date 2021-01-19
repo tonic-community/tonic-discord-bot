@@ -1,0 +1,8 @@
+{
+  "name": "bot",
+  "language": "javascript",
+  "manager": "npm",
+  "token": "Your Discord Token here",
+  "backendUrl": "Your Backend URL here", 
+  "prefix": "!"
+}
