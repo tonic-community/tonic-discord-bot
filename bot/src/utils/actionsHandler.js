@@ -1,8 +1,9 @@
-const simpleMessage = require('./action-blueprints/simpleMessage');
+const sendMessageAction = require('./action-blueprints/sendMessage');
+const sendEmbeddAction = require('./action-blueprints/sendMessage');
 
-async function sendSimpleMessage(action, message) {
+async function sendMessage(action, message) {
   try {
-    let r =  await simpleMessage.send(action, message)
+    let r =  await sendMessageAction.send(action, message)
     return {
       status: 'success',
       message: r.message,
@@ -14,6 +15,22 @@ async function sendSimpleMessage(action, message) {
 
 }
 
+async function sendEmbedd(action, message) {
+  try {
+    let r =  await sendEmbeddAction.send(action, message)
+    return {
+      status: 'success',
+      message: r.message,
+    }
+  }
+  catch(err) {
+    throw(err)
+  }
+
+}
+
+//choose action
+
 async function run(action, message) {
   console.log(action.blueprint[0])
   try {
@@ -23,9 +40,16 @@ async function run(action, message) {
         message: 'action is missing Blueprint'
       }
     } else if (action.blueprint[0]['__component'] === "action-blueprints.send-message"){
-      console.log("ok")
+      let r =  await sendMessage(action, message)
+     
+      return {
+        status: 'success',
+        message: r.message,
+      }
+    } else if (action.blueprint[0]['__component'] === "action-blueprints.send-embedd"){
+      console.log("embedd")
 
-      let r =  await sendSimpleMessage(action, message)
+      let r =  await sendEmbedd(action, message)
      
       return {
         status: 'success',
