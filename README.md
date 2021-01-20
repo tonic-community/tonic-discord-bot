@@ -28,9 +28,10 @@ The bot requires an api endpoint. We recomend using strapi as the bot is optimiz
 
 #### Setup strapi as backend
 1. Setup strapi (Please refer to the strapi documentation to learn how to setup a strapi instance [https:/strapi.io](https://strapi.io))
-2. Go to  http://localhost:1337/admin/plugins/content-manager/collectionType/plugins::users-permissions.user and create a new User for the tonic bot called tonic under Users in Strapi 
-3. Use Postman to make a request with your credentials to your http://localhost:1337/auth/local (see https://strapi.io/documentation/developer-docs/latest/guides/auth-request.html#login-as-a-reader)
-4. add the jwt token to you .env file
+2. Login into your strapi instance and go to settings. Go to Roles under "User and Permission Plugin". Add a Role "Tonic Bot" and give it Permissions to find, findOne and create protocols as well as to find and findOne Actions. 
+3. Go to  http://localhost:1337/admin/plugins/content-manager/collectionType/plugins::users-permissions.user and create a new User for the tonic bot called tonic under Users in Strapi and give it the Role "Tonic Bot"
+4. Use Postman to make a request with your credentials to your http://localhost:1337/auth/local (see https://strapi.io/documentation/developer-docs/latest/guides/auth-request.html#login-as-a-reader)
+5. add the jwt token to you .env file
 
 Your file should now look something like this:
 
@@ -39,6 +40,7 @@ DISCORD_BOT_TOKEN="ODAwMzQ2MTk1MjQ3MzY2MTY1.YAQyeg..."
 DISCORD_BOT_PREFIX="!"
 BACKEND_URL="http://localhost:1337"
 BACKEND_TOKEN="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+BOT_MODERATOR_DISCORD_ROLE="admin"
 ```
 
 For a deployed version check out the DigitalOcean One-click Strapi Droplet https://strapi.io/documentation/developer-docs/latest/installation/digitalocean-one-click.html

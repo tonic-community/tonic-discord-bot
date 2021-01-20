@@ -1,6 +1,7 @@
 async function send(action, message){
   try {
-    const msg = action.Blueprint[0]['message']
+    console.log(action.blueprint[0]['message'])
+    const msg = action.blueprint[0]['message']
     message.channel.send(msg);
     return {
       status: 'success',
@@ -10,7 +11,12 @@ async function send(action, message){
     }
   }
   catch (err) {
-    throw err
+    return {
+      status: 'error',
+      actionId: action.id,
+      message: 'action id: '+action.id + ': sendSimpleMessage error',
+      origin: this,
+    }
   }
 }
 
