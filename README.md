@@ -82,10 +82,6 @@ t_protocol run <name of flow>
 
 Morris Clay – mail@morrisclay.com
 
-Distributed under the CC BY-NC 4.0 license. See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
-
-[https://github.com/tonic-community/tonic-discord-bot/](https://github.com/tonic-community/tonic-discord-bot/)
-
 ## Contributing
 
 Please visit www.tonic.community/contribute to contribute.
@@ -98,4 +94,4 @@ Please visit www.tonic.community/contribute to contribute.
 5. Create a new Pull Request
 
 ### List of Contributers
-Morris Clay, Niklas Eggbert
+Morris Clay, Niklas Egberts
