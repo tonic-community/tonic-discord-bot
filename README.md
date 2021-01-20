@@ -82,21 +82,16 @@ t_protocol run <name of flow>
 
 Morris Clay – mail@morrisclay.com
 
-Distributed under the CC BY-NC 4.0 license. See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
-
-[https://github.com/morrisclay/tonic](https://github.com/morrisclay/)
-
 ## Contributing
 
 Please visit www.tonic.community/contribute to contribute.
 
 ### How to create a pull request
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
+1. Fork it (https://github.com/tonic-community/tonic-discord-bot/fork)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
 ### List of Contributers
-Morris Clay
-Niklas Eggbert
+Morris Clay, Niklas Egberts
