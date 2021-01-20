@@ -27,8 +27,8 @@ BOT_MODERATOR_DISCORD_ROLE="admin"
 The bot requires an api endpoint. We recomend using strapi as the bot is optimized for this backend but any backend providing the expected data structure via api will work.
 
 #### Setup strapi as backend
-1. Setup strapi (Please refer to the strapi documentation to learn how to setup a strapi instance [https:/strapi.io](https://strapi.io))
-2. Login into your strapi instance and go to settings. Go to Roles under "User and Permission Plugin". Add a Role "Tonic Bot" and give it Permissions to find, findOne and create protocols as well as to find and findOne Actions. 
+1. Visit  [[https:/strapi.io](https://github.com/tonic-community/tonic-backend)](https://github.com/tonic-community/tonic-backend) to setup your own backend
+2. Login to your strapi instance and go to settings. Go to Roles under "User and Permission Plugin". Add a Role "Tonic Bot" and give it Permissions to find, findOne and create protocols as well as to find and findOne Actions. 
 3. Go to  http://localhost:1337/admin/plugins/content-manager/collectionType/plugins::users-permissions.user and create a new User for the tonic bot called tonic under Users in Strapi and give it the Role "Tonic Bot"
 4. Use Postman to make a request with your credentials to your http://localhost:1337/auth/local (see https://strapi.io/documentation/developer-docs/latest/guides/auth-request.html#login-as-a-reader)
 5. add the jwt token to you .env file
@@ -84,19 +84,18 @@ Morris Clay – mail@morrisclay.com
 
 Distributed under the CC BY-NC 4.0 license. See https://creativecommons.org/licenses/by-nc/4.0/ for more information.
 
-[https://github.com/morrisclay/tonic](https://github.com/morrisclay/)
+[https://github.com/tonic-community/tonic-discord-bot/](https://github.com/tonic-community/tonic-discord-bot/)
 
 ## Contributing
 
 Please visit www.tonic.community/contribute to contribute.
 
 ### How to create a pull request
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
+1. Fork it (https://github.com/tonic-community/tonic-discord-bot/fork)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
 ### List of Contributers
-Morris Clay
-Niklas Eggbert
+Morris Clay, Niklas Eggbert
