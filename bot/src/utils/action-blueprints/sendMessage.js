@@ -1,25 +1,22 @@
-async function send(action, message){
-  try {
-    console.log(action.blueprint[0]['message'])
-    const msg = action.blueprint[0]['message']
-    message.channel.send(msg);
-    return {
-      status: 'success',
-      actionId: action.id,
-      message: 'action id: '+action.id + ': sendMessage success',
-      origin: this,
-    }
-  }
-  catch (err) {
-    return {
-      status: 'error',
-      actionId: action.id,
-      message: 'action id: '+action.id + ': sendMessage error',
-      origin: this,
-    }
-  }
+async function send(action, message) {
+  console.log("sending message...");
+  const msg = action.blueprint[0]["message"];
+  message.channel.send(msg);
+
+  let p = new Promise((res) =>
+    setTimeout(
+      () =>
+        res({
+          status: "success",
+          actionId: action.id,
+          message: "action id: " + action.id + ": sendMessage success",
+        }),
+      50
+    )
+  );
+  return p;
 }
 
 module.exports = {
-  send
-}
+  send,
+};

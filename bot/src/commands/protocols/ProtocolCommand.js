@@ -11,6 +11,43 @@ module.exports = class ProtocolCommand extends BaseCommand {
   }
 
   run(client, message, args) {
+     // ############################################################# //
+    // minimal queue helper functions  //
+    // ############################################################# //
+    let data = [];
+    let actions = []
+
+    function walkQueue(actions) {
+      runAction(actions[0])
+        .then((res) => {
+          data.push(res);
+          next();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+
+    async function runAction(action) {
+      console.log("running action...", action);
+      let p = await Actions.run(action, message)
+      return p
+    }
+  
+    function next() {
+      console.log("checking for more actions...");
+      if (actions.length > 1) {
+        actions = actions.slice(1);
+        walkQueue(actions);
+      } else {
+        console.log("no more actions found.");
+        finish();
+      }
+    }
+    
+    function finish() {
+      console.log("data collected: ", data);
+    }  
 
     // ############################################################# //
     // defining listProtocols() logic to list all existing protocols //
@@ -46,8 +83,6 @@ module.exports = class ProtocolCommand extends BaseCommand {
       Api.find("/protocols", { name: protocolName })
         .then(
           res => {
-            console.log(res)
-
             if (res === 404) {
               message.channel.send(Messages.protocol_notFound)
               return
@@ -81,7 +116,6 @@ module.exports = class ProtocolCommand extends BaseCommand {
       Api.find("/protocols", { name: protocolName })
         .then(
           res => {
-            console.log(res)
             if (res === 404) {
               message.channel.send(Messages.protocol_notFound)
               return
@@ -92,35 +126,10 @@ module.exports = class ProtocolCommand extends BaseCommand {
               message.channel.send(msg)
               return
             }
-            
-            const actionsCollection = res[0].actions
-
-            for (var i = 0; i < actionsCollection.length; i++) {
-              var currentAction = {
-                id: actionsCollection[i].id,
-                name: actionsCollection[i].name
-              }
-              async function runAction() {
-                try {
-                  let r = await Actions.run(actionsCollection[i], message)
-                  if (r.status === "error") {
-                    var msg = Messages.error
-                    msg
-                      .setDescription("Error: Action with the name *" + currentAction.name + "* failed: " + r.message)
-                    message.channel.send(msg)
-                  }
-                }
-                catch (err) {
-                  console.log(err)
-
-                }
-                finally {
-                  return
-                }
-              }
-              runAction()
-
-            }
+            console.log(`response ${res[0]}`)
+            actions = res[0].actions
+   
+            walkQueue(actions)
           }
         ).catch(function (err) {
           var msg = Messages.error
