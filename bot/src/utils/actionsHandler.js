@@ -1,6 +1,9 @@
 const sendMessageAction = require("./action-blueprints/sendMessage");
 const sendEmbeddAction = require("./action-blueprints/sendEmbedd");
 const collectMessagesAction = require("./action-blueprints/collectMessages");
+const triggerWebhookAction = require("./action-blueprints/triggerWebhook");
+
+//invoke action and execute any relevant code before starting action here
 
 async function sendMessage(action, message) {
   try {
@@ -41,9 +44,22 @@ async function collectMessages(action, message) {
   }
 }
 
+async function triggerWebhook(action, message, data) {
+  try {
+    let p = await triggerWebhookAction.send(action, message, data);
+    return {
+      status: p.status,
+      message: p.message,
+      data: p.data,
+    };
+  } catch (err) {
+    throw err;
+  }
+}
+
 //choose action
 
-async function run(action, message) {
+async function run(action, message, data) {
   try {
     if (action.blueprint[0] === undefined) {
       return {
@@ -72,6 +88,15 @@ async function run(action, message) {
       action.blueprint[0]["__component"] === "action-blueprints.message-collector"
     ) {
       let r = await collectMessages(action, message);
+      return {
+        status: r.status,
+        message: r.message,
+        data: r.data,
+      };
+    } else if (
+      action.blueprint[0]["__component"] === "action-blueprints.trigger-webhook"
+    ) {
+      let r = await triggerWebhook(action, message, data);
       return {
         status: r.status,
         message: r.message,

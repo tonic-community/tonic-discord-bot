@@ -20,7 +20,8 @@ module.exports = class ProtocolCommand extends BaseCommand {
     function walkQueue(actions) {
       runAction(actions[0])
         .then((res) => {
-          data.push(res);
+          data.push(res.data)
+          console.log(`data is ${data[0]}`);
           next();
         })
         .catch((e) => {
@@ -29,8 +30,7 @@ module.exports = class ProtocolCommand extends BaseCommand {
     }
 
     async function runAction(action) {
-      console.log("running action...", action);
-      let p = await Actions.run(action, message)
+      let p = await Actions.run(action, message, data)
       return p
     }
   
@@ -126,7 +126,6 @@ module.exports = class ProtocolCommand extends BaseCommand {
               message.channel.send(msg)
               return
             }
-            console.log(`response ${res[0]}`)
             actions = res[0].actions
    
             walkQueue(actions)
