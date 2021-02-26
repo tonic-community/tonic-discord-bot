@@ -3,9 +3,8 @@ const axios = require('axios');
 async function send(action, message, data) {
   const lastItem = data[data.length - 1]
   console.log(lastItem.data)
-  console.log(action.blueprint[0]["endpoint"])
 
-  axios.post('http://localhost:5678/webhook/6631c8b2-0947-4b78-8d25-e4d60f837813', {
+  axios.post(action.blueprint[0]["endpoint"], {
     data: lastItem
   })
   .then(function (response) {
