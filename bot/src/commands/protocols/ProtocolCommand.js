@@ -120,6 +120,7 @@ module.exports = class ProtocolCommand extends BaseCommand {
               message.channel.send(Messages.protocol_notFound)
               return
             }
+  
             if (res == 403) {
               var msg = Messages.error
               msg.setDescription("403: The backend refused to connection to the bot")
@@ -133,7 +134,7 @@ module.exports = class ProtocolCommand extends BaseCommand {
         ).catch(function (err) {
           var msg = Messages.error
           msg
-          errorHelp.setDescription(err)
+          .setDescription(err)
           message.channel.send(msg)
         });
     }
